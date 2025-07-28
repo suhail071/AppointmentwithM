@@ -4,8 +4,8 @@ import smtplib
 from email.message import EmailMessage
 
 # ==== CONFIGURATION ====
-YOUR_EMAIL = "your_email@example.com"
-YOUR_EMAIL_PASSWORD = "your_app_password"  # Use App Password if Gmail
+YOUR_EMAIL = "bunty071@gmail.com"
+YOUR_EMAIL_PASSWORD = "Maryam@6233"  # Use App Password if Gmail
 SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 587
 
