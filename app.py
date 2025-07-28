@@ -9,11 +9,11 @@ appointment_time = "Tonight at 10:00 PM 💫"
 rejection_reasons = [
     "I'm Still Pissed at you!",
     "I have a super urgent meeting with my blanket",
-    "Sorry, I have to FIX the world",
+    "Sorry, You are last on the Priority List.",
     "Everything else > Suhail, sorry not sorry",
     "Fatu's cat said no. I trust her judgment ",
-    "I Hate YOU!!",
-    "You don't deserve to see my face."
+    "You don't deserve my attention",
+    "I Hate YOU!~ You don't deserve to see my face."
 ]
 
 # === Functions ===
