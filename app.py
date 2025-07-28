@@ -7,13 +7,13 @@ RESPONSE_FILE = "response.txt"
 LOG_FILE = "response_log.txt"
 appointment_time = "Tonight at 10:00 PM 💫"
 rejection_reasons = [
-    "I'm Still Pissed at you!",
-    "I have a super urgent meeting with my blanket",
-    "Sorry, You are last on the Priority List.",
-    "Everything else > Suhail, sorry not sorry",
-    "Fatu's cat said no. I trust her judgment ",
-    "You don't deserve my attention",
-    "I Hate YOU!~ You don't deserve to see my face."
+    "I'm busy practicing my Oscar speech in the mirror 🏆",
+    "I have a super urgent meeting with my blanket 😴",
+    "Sorry, it's national ignore-your-boyfriend day 🙈",
+    "Netflix > Suhail tonight, sorry not sorry 🍿",
+    "My cat said no. I trust her judgment 🐱",
+    "I Hate YOU!!",
+    "You don't deserve to see my face."
 ]
 
 # === Functions ===
@@ -39,11 +39,11 @@ def clear_response():
 # === UI Setup ===
 st.set_page_config(page_title="Suhail’s Video Call Request 💖", page_icon="📞")
 st.title("🌸 Video Call Request from Suhail")
-st.subheader("✨ Mariyam, Suhail wants to video call you...")
+st.subheader("✨ He wants to video call you...")
 st.write(f"🕒 **Requested Time:** {appointment_time}")
 st.markdown("---")
 
-# === Custom CSS for dropdown ===
+# === CSS for formatting dropdown ===
 st.markdown("""
     <style>
     .rejection-container .stSelectbox > div {
@@ -59,7 +59,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# === Load previous response ===
+# === Existing response logic ===
 previous_response = load_response()
 
 if previous_response:
@@ -80,7 +80,7 @@ if previous_response:
 
     st.stop()
 
-# === First row: Accept ===
+# === First Row: Accept ===
 st.markdown("### ✅ Accept the Call")
 if st.button("✅ Accept"):
     response = f"✅ Accepted the video call at {appointment_time}."
@@ -92,7 +92,7 @@ if st.button("✅ Accept"):
 # === Divider ===
 st.markdown("---")
 
-# === Second row: Reject & Suggest Time ===
+# === Second Row: Reject & Suggest ===
 col1, col2 = st.columns(2)
 
 with col1:
@@ -118,3 +118,22 @@ with col2:
         log_response(response)
         st.success("Suggestion saved! Refresh to see it permanently.")
         st.rerun()
+
+# === Hidden Admin Section ===
+st.markdown("---")
+with st.expander("🔒 Admin Log Access (Private)"):
+    password = st.text_input("Enter admin password:", type="password")
+
+    if password == "suhail071":
+        if os.path.exists(LOG_FILE):
+            with open(LOG_FILE, "rb") as f:
+                st.download_button(
+                    label="⬇️ Download response_log.txt",
+                    data=f,
+                    file_name="response_log.txt",
+                    mime="text/plain"
+                )
+        else:
+            st.warning("No log file found yet.")
+    elif password:
+        st.error("Incorrect password.")
