@@ -11,7 +11,7 @@ rejection_reasons = [
     "I have a super urgent meeting with my blanket",
     "Sorry, You are last on the Priority List.",
     "Everything else > Suhail, sorry not sorry",
-    "Fatu's cat said no. I trust her judgment ",
+    "Fatu's cat said no. I trust his judgment ",
     "You don't deserve my attention",
     "I Hate YOU!~ You don't deserve to see my face."
 ]
