@@ -7,13 +7,13 @@ RESPONSE_FILE = "response.txt"
 LOG_FILE = "response_log.txt"
 appointment_time = "Tonight at 10:00 PM 💫"
 rejection_reasons = [
-    "I'm busy practicing my Oscar speech in the mirror 🏆",
-    "I have a super urgent meeting with my blanket 😴",
-    "Sorry, it's national ignore-your-boyfriend day 🙈",
-    "Netflix > Suhail tonight, sorry not sorry 🍿",
-    "My cat said no. I trust her judgment 🐱",
-    "I Hate YOU!!",
-    "You don't deserve to see my face."
+        "I'm Still Pissed at you!",
+    "I have a super urgent meeting with my blanket",
+    "Sorry, You are last on the Priority List.",
+    "Everything else > Suhail, sorry not sorry",
+    "Fatu's cat said no. I trust her judgment ",
+    "You don't deserve my attention",
+    "I Hate YOU!~ You don't deserve to see my face."
 ]
 
 # === Functions ===
