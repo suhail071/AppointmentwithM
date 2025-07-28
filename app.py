@@ -1,9 +1,10 @@
 import streamlit as st
 import os
-import datetime
+from datetime import datetime
 
 # === Constants ===
 RESPONSE_FILE = "response.txt"
+LOG_FILE = "response_log.txt"
 appointment_time = "Tonight at 10:00 PM 💫"
 rejection_reasons = [
     "I'm busy practicing my Oscar speech in the mirror 🏆",
@@ -25,6 +26,11 @@ def load_response():
 def save_response(text):
     with open(RESPONSE_FILE, "w") as f:
         f.write(text)
+
+def log_response(text):
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    with open(LOG_FILE, "a") as f:
+        f.write(f"[{timestamp}] {text}\n")
 
 def clear_response():
     if os.path.exists(RESPONSE_FILE):
@@ -59,7 +65,7 @@ previous_response = load_response()
 if previous_response:
     st.markdown("### 📝 Your Response Has Been Recorded:")
     st.info(previous_response)
-    
+
     col_refresh, col_clear = st.columns([1, 2])
 
     with col_refresh:
@@ -74,11 +80,12 @@ if previous_response:
 
     st.stop()
 
-# === First row: Accept button ===
+# === First row: Accept ===
 st.markdown("### ✅ Accept the Call")
 if st.button("✅ Accept"):
     response = f"✅ Accepted the video call at {appointment_time}."
     save_response(response)
+    log_response(response)
     st.success("Response saved! Refresh to see your answer permanently.")
     st.rerun()
 
@@ -97,6 +104,7 @@ with col1:
     if st.button("Submit Rejection"):
         response = f"❌ Rejected the call.\n**Reason:** {reason}"
         save_response(response)
+        log_response(response)
         st.success("Rejection saved! Refresh to see it permanently.")
         st.rerun()
 
@@ -107,5 +115,6 @@ with col2:
         readable = new_time.strftime("%I:%M %p")
         response = f"🔁 Suggested a new time: {readable} instead of {appointment_time}."
         save_response(response)
+        log_response(response)
         st.success("Suggestion saved! Refresh to see it permanently.")
         st.rerun()
