@@ -10,9 +10,9 @@ rejection_reasons = [
     "I have a super urgent meeting with my blanket 😴",
     "Sorry, it's national ignore-your-boyfriend day 🙈",
     "Netflix > Suhail tonight, sorry not sorry 🍿",
-    "My cat said no. I trust her judgment 🐱"
-    "I Hate YOU!!"
-    "You don't deserve to see my Face."
+    "My cat said no. I trust her judgment 🐱",
+    "I Hate YOU!!",
+    "You don't deserve to see my face."
 ]
 
 # === Functions ===
@@ -67,20 +67,19 @@ if previous_response:
         st.warning("You already responded. Thank you! 😇")
         st.stop()
 
-# === No response yet - show options ===
-col1, col2, col3 = st.columns(3)
+# === First row: Accept button ===
+st.markdown("### ✅ Accept the Call")
+if st.button("✅ Accept"):
+    response = f"✅ Accepted the video call at {appointment_time}."
+    save_response(response)
+    st.success("Response saved! Refresh to see your answer permanently.")
+    st.stop()
 
-# Accept
+# === Second row: Reject & Suggest Time ===
+col1, col2 = st.columns(2)
+
 with col1:
-    if st.button("✅ Accept"):
-        response = f"✅ Accepted the video call at {appointment_time}."
-        save_response(response)
-        st.success("Response saved! Refresh to see your answer permanently.")
-        st.stop()
-
-# Reject
-with col2:
-    st.markdown("#### ❌ Reject:")
+    st.markdown("### ❌ Reject:")
     with st.container():
         st.markdown('<div class="rejection-container">', unsafe_allow_html=True)
         reason = st.selectbox("Pick a reason:", rejection_reasons)
@@ -91,9 +90,8 @@ with col2:
         st.success("Rejection saved! Refresh to see it permanently.")
         st.stop()
 
-# Suggest another time
-with col3:
-    st.markdown("#### 🔁 Suggest Time:")
+with col2:
+    st.markdown("### 🔁 Suggest Time:")
     new_time = st.time_input("Suggest a new time:")
     if st.button("Submit Suggestion"):
         readable = new_time.strftime("%I:%M %p")
