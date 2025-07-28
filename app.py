@@ -9,7 +9,7 @@ appointment_time = "Tonight at 10:00 PM 💫"
 rejection_reasons = [
     "I'm busy practicing my Oscar speech in the mirror 🏆",
     "I have a super urgent meeting with my blanket 😴",
-    "Sorry, it's national ignore-your-boyfriend day 🙈",
+    "Sorry, it's national ignore-your-EX boyfriend day 🙈",
     "Netflix > Suhail tonight, sorry not sorry 🍿",
     "My cat said no. I trust her judgment 🐱",
     "I Hate YOU!!",
