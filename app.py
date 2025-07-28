@@ -37,7 +37,7 @@ st.subheader("✨ He wants to video call you...")
 st.write(f"🕒 **Requested Time:** {appointment_time}")
 st.markdown("---")
 
-# === CSS for better dropdown formatting ===
+# === Custom CSS for dropdown ===
 st.markdown("""
     <style>
     .rejection-container .stSelectbox > div {
@@ -53,19 +53,26 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# === Logic ===
+# === Load previous response ===
 previous_response = load_response()
 
 if previous_response:
     st.markdown("### 📝 Your Response Has Been Recorded:")
     st.info(previous_response)
-    if st.button("😅 Sorry, I changed my mind"):
-        clear_response()
-        st.success("Response cleared! You can now choose again.")
-        st.stop()
-    else:
-        st.warning("You already responded. Thank you! 😇")
-        st.stop()
+    
+    col_refresh, col_clear = st.columns([1, 2])
+
+    with col_refresh:
+        if st.button("🔄 Refresh"):
+            st.rerun()
+
+    with col_clear:
+        if st.button("😅 Sorry, I changed my mind"):
+            clear_response()
+            st.success("Response cleared! You can now choose again.")
+            st.rerun()
+
+    st.stop()
 
 # === First row: Accept button ===
 st.markdown("### ✅ Accept the Call")
@@ -73,7 +80,10 @@ if st.button("✅ Accept"):
     response = f"✅ Accepted the video call at {appointment_time}."
     save_response(response)
     st.success("Response saved! Refresh to see your answer permanently.")
-    st.stop()
+    st.rerun()
+
+# === Divider ===
+st.markdown("---")
 
 # === Second row: Reject & Suggest Time ===
 col1, col2 = st.columns(2)
@@ -88,7 +98,7 @@ with col1:
         response = f"❌ Rejected the call.\n**Reason:** {reason}"
         save_response(response)
         st.success("Rejection saved! Refresh to see it permanently.")
-        st.stop()
+        st.rerun()
 
 with col2:
     st.markdown("### 🔁 Suggest Time:")
@@ -98,4 +108,4 @@ with col2:
         response = f"🔁 Suggested a new time: {readable} instead of {appointment_time}."
         save_response(response)
         st.success("Suggestion saved! Refresh to see it permanently.")
-        st.stop()
+        st.rerun()
