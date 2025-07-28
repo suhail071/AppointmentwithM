@@ -39,7 +39,7 @@ def clear_response():
 # === UI Setup ===
 st.set_page_config(page_title="Suhail’s Video Call Request 💖", page_icon="📞")
 st.title("🌸 Video Call Request from Suhail")
-st.subheader("✨ He wants to video call you...")
+st.subheader("✨ Mariyam, Suhail wants to video call you...")
 st.write(f"🕒 **Requested Time:** {appointment_time}")
 st.markdown("---")
 
