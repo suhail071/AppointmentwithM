@@ -2,7 +2,7 @@ import streamlit as st
 import os
 import datetime
 
-# Constants
+# === Constants ===
 RESPONSE_FILE = "response.txt"
 appointment_time = "Tonight at 10:00 PM 💫"
 rejection_reasons = [
@@ -11,9 +11,11 @@ rejection_reasons = [
     "Sorry, it's national ignore-your-boyfriend day 🙈",
     "Netflix > Suhail tonight, sorry not sorry 🍿",
     "My cat said no. I trust her judgment 🐱"
+    "I Hate YOU!!"
+    "You don't deserve to see my Face."
 ]
 
-# Load and save
+# === Functions ===
 def load_response():
     if os.path.exists(RESPONSE_FILE):
         with open(RESPONSE_FILE, "r") as f:
@@ -28,14 +30,30 @@ def clear_response():
     if os.path.exists(RESPONSE_FILE):
         os.remove(RESPONSE_FILE)
 
-# UI
+# === UI Setup ===
 st.set_page_config(page_title="Suhail’s Video Call Request 💖", page_icon="📞")
 st.title("🌸 Video Call Request from Suhail")
 st.subheader("✨ He wants to video call you...")
 st.write(f"🕒 **Requested Time:** {appointment_time}")
 st.markdown("---")
 
-# Check saved response
+# === CSS for better dropdown formatting ===
+st.markdown("""
+    <style>
+    .rejection-container .stSelectbox > div {
+        width: 100% !important;
+    }
+    .rejection-container .stSelectbox label {
+        font-weight: 500;
+    }
+    .rejection-container .stSelectbox .css-1cpxqw2 {
+        min-height: 45px !important;
+        font-size: 16px !important;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
+# === Logic ===
 previous_response = load_response()
 
 if previous_response:
@@ -49,9 +67,10 @@ if previous_response:
         st.warning("You already responded. Thank you! 😇")
         st.stop()
 
-# No response yet — show 3 buttons
+# === No response yet - show options ===
 col1, col2, col3 = st.columns(3)
 
+# Accept
 with col1:
     if st.button("✅ Accept"):
         response = f"✅ Accepted the video call at {appointment_time}."
@@ -59,15 +78,20 @@ with col1:
         st.success("Response saved! Refresh to see your answer permanently.")
         st.stop()
 
+# Reject
 with col2:
     st.markdown("#### ❌ Reject:")
-    reason = st.selectbox("Pick a reason:", rejection_reasons)
+    with st.container():
+        st.markdown('<div class="rejection-container">', unsafe_allow_html=True)
+        reason = st.selectbox("Pick a reason:", rejection_reasons)
+        st.markdown('</div>', unsafe_allow_html=True)
     if st.button("Submit Rejection"):
         response = f"❌ Rejected the call.\n**Reason:** {reason}"
         save_response(response)
         st.success("Rejection saved! Refresh to see it permanently.")
         st.stop()
 
+# Suggest another time
 with col3:
     st.markdown("#### 🔁 Suggest Time:")
     new_time = st.time_input("Suggest a new time:")
